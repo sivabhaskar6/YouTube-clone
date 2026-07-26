@@ -9,6 +9,7 @@ import {
   MdDownload,
   MdLiveTv,
   MdOutlineMovie,
+  MdOutlineAccountCircle
 } from "react-icons/md";
 
 import { SiYoutubemusic, SiYoutubekids } from "react-icons/si";
@@ -72,8 +73,12 @@ const SideBar = () => {
           You
           <IoChevronForward className="ml-1" size={18} />
         </h2>
-
+    
         <div className="space-y-1">
+          <div  className="flex items-center gap-5 p-2 rounded-xl hover:bg-gray-100 cursor-pointer">
+            <MdOutlineAccountCircle size={22}/>
+            <span>Your channel</span>
+          </div>
           <div className="flex items-center gap-5 p-2 rounded-xl hover:bg-gray-100 cursor-pointer">
             <MdHistory size={22} />
             <span>History</span>
