@@ -3,15 +3,23 @@ import { FaYoutube } from "react-icons/fa";
 import { IoSearch, IoNotificationsOutline } from "react-icons/io5";
 import { MdMic } from "react-icons/md";
 import { FaRegUserCircle } from "react-icons/fa";
+import { toggleMenu } from "../utils/appSlice";
+import { useDispatch } from "react-redux";
 
 const Header = () => {
+
+  const dispatch = useDispatch();
+  const toggleMenuHandeler = ()=>{
+    dispatch(toggleMenu());
+  }
+
   return (
     <header className="sticky top-0 z-50 bg-white flex items-center justify-between px-6 py-3 shadow-sm">
 
       {/* Left */}
       <div className="flex items-center gap-5">
-        <button className="p-2 rounded-full hover:bg-gray-100">
-          <RxHamburgerMenu size={25} />
+        <button className="p-2 rounded-full hover:bg-gray-100" >
+          <RxHamburgerMenu size={25} onClick={()=>toggleMenuHandeler()}/>
         </button>
 
         <div className="flex items-center cursor-pointer">

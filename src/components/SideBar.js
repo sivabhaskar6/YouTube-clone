@@ -15,9 +15,14 @@ import {
 import { SiYoutubemusic, SiYoutubekids } from "react-icons/si";
 import { IoGameControllerOutline, IoChevronForward } from "react-icons/io5";
 import { PiFilmSlateBold } from "react-icons/pi";
+import { useSelector } from "react-redux";
 
 const SideBar = () => {
-  return (
+
+  const {isMenuOpen}  = useSelector(store => store.app)
+  if(!isMenuOpen) return null;
+
+  return ( 
     <aside className="w-64 h-screen overflow-y-auto px-4 py-3 text-[15px]">
 
       {/* Main */}
