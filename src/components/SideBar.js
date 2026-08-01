@@ -23,8 +23,7 @@ const SideBar = () => {
   if(!isMenuOpen) return null;
 
   return ( 
-    <aside className="w-64 h-screen overflow-y-auto px-4 py-3 text-[15px]">
-
+    <aside className="w-56 h-full overflow-y-auto overscroll-contain sidebar-scroll  text-[15px] font-semibold">
       {/* Main */}
       <div className="space-y-1">
         <div className="flex items-center gap-5 p-2 rounded-xl hover:bg-gray-100 cursor-pointer">
@@ -124,7 +123,7 @@ const SideBar = () => {
           More from YouTube
         </h2>
 
-        <div className="space-y-1">
+        <div className="space-y-1 mb-5">
           <div className="flex items-center gap-5 p-2 rounded-xl hover:bg-gray-100 cursor-pointer">
             <SiYoutubemusic size={22} />
             <span>YouTube Music</span>

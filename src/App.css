@@ -1,3 +1,32 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+/* Sidebar: scrollbar hidden until hover */
+.sidebar-scroll {
+  scrollbar-width: thin;              /* Firefox */
+  scrollbar-color: transparent transparent;
+}
+.sidebar-scroll:hover {
+  scrollbar-color: #c1c1c1 transparent;
+}
+.sidebar-scroll::-webkit-scrollbar {  /* Chrome/Edge/Safari */
+  width: 8px;
+}
+.sidebar-scroll::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  border-radius: 9999px;
+}
+.sidebar-scroll:hover::-webkit-scrollbar-thumb {
+  background-color: #c1c1c1;
+}
+
+/* ButtonList: scrollbar always hidden */
+.scrollbar-hide {
+  -ms-overflow-style: none;   /* IE/Edge legacy */
+  scrollbar-width: none;      /* Firefox */
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;              /* Chrome/Edge/Safari */
+}
