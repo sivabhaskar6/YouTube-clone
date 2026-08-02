@@ -23,7 +23,7 @@ const SideBar = () => {
   if(!isMenuOpen) return null;
 
   return ( 
-    <aside className="w-56 h-full overflow-y-auto overscroll-contain sidebar-scroll  text-[15px] font-semibold">
+    <aside className="w-[192px]  ml-4 h-full overflow-y-auto overscroll-contain sidebar-scroll  text-[15px] font-semibold">
       {/* Main */}
       <div className="space-y-1">
         <div className="flex items-center gap-5 p-2 rounded-xl hover:bg-gray-100 cursor-pointer">
