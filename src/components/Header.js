@@ -5,26 +5,26 @@ import { MdMic } from "react-icons/md";
 import { FaRegUserCircle } from "react-icons/fa";
 import { toggleMenu } from "../utils/appSlice";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
 const Header = () => {
 
   const dispatch = useDispatch();
-  const toggleMenuHandeler = ()=>{
-    dispatch(toggleMenu());
-  }
 
   return (
     <header className="sticky top-0 z-50 bg-white flex items-center justify-between px-2 py-2 shadow-sm">
       {/* Left */}
       <div className="flex items-center gap-5">
-        <button className="p-2 rounded-full hover:bg-gray-100" >
-          <RxHamburgerMenu size={23} onClick={()=>toggleMenuHandeler()}/>
+        <button className="p-2 rounded-full hover:bg-gray-100"  onClick={()=>dispatch(toggleMenu())} >
+          <RxHamburgerMenu size={23}/>
         </button>
 
-        <div className="flex items-center cursor-pointer">
-          <FaYoutube size={33} className="text-red-600" />
-          <h1 className="ml-1 text-2xl font-semibold">YouTube</h1>
-        </div>
+         <Link to={"/"} >
+          <div className="flex items-center cursor-pointer">
+            <FaYoutube size={33} className="text-red-600" />
+            <h1 className="ml-1 text-2xl font-semibold">YouTube</h1>
+          </div>
+        </Link>
       </div>
 
       {/* Middle */}

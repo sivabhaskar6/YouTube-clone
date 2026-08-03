@@ -16,6 +16,7 @@ import { SiYoutubemusic, SiYoutubekids } from "react-icons/si";
 import { IoGameControllerOutline, IoChevronForward } from "react-icons/io5";
 import { PiFilmSlateBold } from "react-icons/pi";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const SideBar = () => {
 
@@ -26,20 +27,26 @@ const SideBar = () => {
     <aside className="w-[192px]  ml-4 h-full overflow-y-auto overscroll-contain sidebar-scroll  text-[15px] font-semibold">
       {/* Main */}
       <div className="space-y-1">
-        <div className="flex items-center gap-5 p-2 rounded-xl hover:bg-gray-100 cursor-pointer">
-          <MdHomeFilled size={24} />
-          <span>Home</span>
-        </div>
+        <Link to={"/"} >
+          <div className="flex items-center gap-5 p-2 rounded-xl hover:bg-gray-100 cursor-pointer">
+            <MdHomeFilled size={24} />
+            <span>Home</span>
+          </div>
+        </Link>
 
-        <div className="flex items-center gap-5 p-2 rounded-xl hover:bg-gray-100 cursor-pointer">
-          <PiFilmSlateBold size={24} />
-          <span>Shorts</span>
-        </div>
+        <Link to={"/shorts"} >
+          <div className="flex items-center gap-5 p-2 rounded-xl hover:bg-gray-100 cursor-pointer">
+            <PiFilmSlateBold size={24} />
+            <span>Shorts</span>
+          </div>
+        </Link>
 
-        <div className="flex items-center gap-5 p-2 rounded-xl hover:bg-gray-100 cursor-pointer">
-          <MdLiveTv size={24} />
-          <span>Live</span>
-        </div>
+        <Link to={"/live"} >
+          <div className="flex items-center gap-5 p-2 rounded-xl hover:bg-gray-100 cursor-pointer">
+            <MdLiveTv size={24} />
+            <span>Live</span>
+          </div>
+        </Link>
       </div>
 
       <hr className="my-4" />

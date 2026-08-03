@@ -18,6 +18,7 @@ const VideoCard = ({ info }) => {
   const size = isMenuOpen ? "w-[430px]" : "w-[373px]";
 
   return (
+    // {() => window.open(`https://www.youtube.com/watch?v=${info.id}`, "_blank")}
     <div className={`${size} cursor-pointer p-2 rounded-lg hover:bg-blue-50`}>
       {/* Thumbnail */}
       <img
