@@ -2,6 +2,7 @@ import { useDispatch } from "react-redux";
 import { closeMenu } from "../utils/appSlice";
 import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
+import CommentsContainer from "./CommentsContainer";
 
 
 const WatchPage = () =>{
@@ -17,17 +18,22 @@ const WatchPage = () =>{
 
 
     return (
-        <div className="flex justify-center items-center ">
-           <iframe
-                width="1200"
-                height="600"
-                src={`https://www.youtube.com/embed/${videoId}`}
-                title="YouTube video player"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerPolicy="strict-origin-when-cross-origin"
-                allowFullScreen
-            ></iframe>
+        <div className=" flex flex-col w-[1180px]">
+            <div className="ml-32">
+                <iframe 
+                    width="1050"
+                    height="500"
+                    src={`https://www.youtube.com/embed/${videoId}`}
+                    title="YouTube video player"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerPolicy="strict-origin-when-cross-origin"
+                    allowFullScreen
+                ></iframe>
+            </div>
+           
+            <div className=" ml-32 mt-5 bg-gray-100">
+                <CommentsContainer />
+            </div>
         </div>
         
     )
