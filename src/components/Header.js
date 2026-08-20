@@ -6,10 +6,40 @@ import { FaRegUserCircle } from "react-icons/fa";
 import { toggleMenu } from "../utils/appSlice";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { YOUTUBE_SEARCH_API } from "../utils/constants";
+  import { useEffect, useState } from "react";
+
+
 
 const Header = () => {
 
   const dispatch = useDispatch();
+  const [searchQuery, setSearchQuery] = useState("");
+  const [suggestions, setSuggestions] = useState([]);
+
+  useEffect(() => {
+
+    // Don't call API for empty search
+    if (!searchQuery.trim()) return;
+
+    // Start new timer
+    const timer= setTimeout(() => {
+      getSearchSuggestions();
+    }, 200);
+
+    // Cleanup when searchQuery changes/unmounts
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [searchQuery]);
+
+  const getSearchSuggestions = async () => {
+    const response = await fetch(YOUTUBE_SEARCH_API + searchQuery);
+    const data = await response.json();
+
+    setSuggestions(data[1]);
+    console.log(data[1]);
+  };
 
   return (
     <header className="sticky top-0 z-50 bg-white flex items-center justify-between px-2 py-2 shadow-sm">
@@ -28,22 +58,38 @@ const Header = () => {
       </div>
 
       {/* Middle */}
-      <div className="flex items-center w-[45%]">
+      <div className="w-[45%]">
+        <div className="flex items-center ">
+          <input
+            type="text"
+            placeholder="Search"
+            className="flex-1 border border-gray-300 rounded-l-full px-5 py-2 outline-none focus:border-blue-500"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
 
-        <input
-          type="text"
-          placeholder="Search"
-          className="flex-1 border border-gray-300 rounded-l-full px-5 py-2 outline-none focus:border-blue-500"
-        />
+          <button className="border border-l-0 border-gray-300 rounded-r-full bg-gray-100 px-6 py-2 hover:bg-gray-200">
+            <IoSearch size={21} />
+          </button>
 
-        <button className="border border-l-0 border-gray-300 rounded-r-full bg-gray-100 px-6 py-2 hover:bg-gray-200">
-          <IoSearch size={21} />
-        </button>
-
-        <button className="ml-3 p-3 rounded-full bg-gray-100 hover:bg-gray-200">
-          <MdMic size={20} />
-        </button>
-
+          <button className="ml-3 p-3 rounded-full bg-gray-100 hover:bg-gray-200">
+            <MdMic size={20} />
+          </button>
+        </div>
+        {searchQuery.trim() && (
+          <div className="absolute bg-white w-[36.5%]  shadow-lg rounded-xl mt-1 pb-1 ">
+            <ul>
+              {suggestions.map((suggestion, index) => (
+                <li key={index} className="px-4 py-2 mx-2 hover:bg-gray-200 rounded-xl cursor-pointer">
+                  <div className="flex place-items-end gap-2">
+                    < IoSearch size={16} />
+                    {suggestion}
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
 
       {/* Right */}
