@@ -4,10 +4,11 @@ import { IoSearch, IoNotificationsOutline } from "react-icons/io5";
 import { MdMic } from "react-icons/md";
 import { FaRegUserCircle } from "react-icons/fa";
 import { toggleMenu } from "../utils/appSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { YOUTUBE_SEARCH_API } from "../utils/constants";
   import { useEffect, useState } from "react";
+import { cacheResults } from "../utils/searchSlice";
 
 
 
@@ -16,6 +17,8 @@ const Header = () => {
   const dispatch = useDispatch();
   const [searchQuery, setSearchQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const searchCache = useSelector((store) => store.search);
 
   useEffect(() => {
 
@@ -24,8 +27,13 @@ const Header = () => {
 
     // Start new timer
     const timer= setTimeout(() => {
+      if(searchCache[searchQuery])
+      {
+        setSuggestions(searchCache[searchQuery]);
+        return;
+      }
       getSearchSuggestions();
-    }, 200);
+    }, 150);
 
     // Cleanup when searchQuery changes/unmounts
     return () => {
@@ -38,7 +46,9 @@ const Header = () => {
     const data = await response.json();
 
     setSuggestions(data[1]);
+    console.log(searchQuery);
     console.log(data[1]);
+    dispatch(cacheResults({ [searchQuery]: data[1] }));
   };
 
   return (
@@ -65,7 +75,9 @@ const Header = () => {
             placeholder="Search"
             className="flex-1 border border-gray-300 rounded-l-full px-5 py-2 outline-none focus:border-blue-500"
             value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+            onChange={(e) => setSearchQuery(e.target.value.trim())}
+            onFocus={()=>setShowSuggestions(true)}
+            onBlur={()=>setShowSuggestions(false)}
           />
 
           <button className="border border-l-0 border-gray-300 rounded-r-full bg-gray-100 px-6 py-2 hover:bg-gray-200">
@@ -76,7 +88,7 @@ const Header = () => {
             <MdMic size={20} />
           </button>
         </div>
-        {searchQuery.trim() && (
+        {showSuggestions && searchQuery.trim() && (
           <div className="absolute bg-white w-[36.5%]  shadow-lg rounded-xl mt-1 pb-1 ">
             <ul>
               {suggestions.map((suggestion, index) => (
