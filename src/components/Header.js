@@ -33,7 +33,7 @@ const Header = () => {
         return;
       }
       getSearchSuggestions();
-    }, 150);
+    }, 200);
 
     // Cleanup when searchQuery changes/unmounts
     return () => {
