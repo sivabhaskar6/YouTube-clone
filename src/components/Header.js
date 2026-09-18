@@ -111,7 +111,7 @@ const Header = () => {
           <IoNotificationsOutline size={23} />
         </button>
 
-        <button className="rounded-full hover:bg-gray-100 p-1">
+        <button className="rounded-full p-1">
           <FaRegUserCircle size={33} />
         </button>
 
